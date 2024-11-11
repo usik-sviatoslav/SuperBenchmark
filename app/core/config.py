@@ -1,3 +1,5 @@
+import os
+
 from pydantic.v1 import BaseSettings
 
 
@@ -6,8 +8,7 @@ class Settings(BaseSettings):
         env_file = ".env"
         case_sensitive = True
 
-    SUPERBENCHMARK_DEBUG: bool = True
-    DEBUG: bool = SUPERBENCHMARK_DEBUG
+    DEBUG: bool = os.getenv("SUPERBENCHMARK_DEBUG", "False") == "True"
     APP_NAME: str = "SuperBenchmark"
     PORT: int = 8000
 
